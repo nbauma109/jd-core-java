@@ -1,6 +1,19 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '5.2.0'
+  id 'java'
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'application'
+
+java {
+    withSourcesJar()
+}
+
+shadowJar {
+   relocate 'jd.core', 'com.github.nviennot.jd.core.java'
+}
 
 mainClassName = "jd.core.Main"
 
@@ -28,6 +41,10 @@ jar {
 	manifest {
 		attributes 'Main-Class': mainClassName
 	}
+}
+
+build {
+	dependsOn shadowJar
 }
 
 clean {
