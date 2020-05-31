@@ -7,19 +7,21 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'application'
 
-java {
-    withSourcesJar()
-}
+mainClassName = "com.github.nviennot.jd.core.java.Main"
 
 shadowJar {
    relocate 'jd.core', 'com.github.nviennot.jd.core.java'
+   metaInf {
+      from "jd-intellij/src/main/native"
+   }
+   manifest {
+      attributes 'Main-Class': mainClassName
+   }
+   baseName = 'jd-core-java-shadow'
+   classifier = ''
+   archiveVersion = ''
 }
 
-mainClassName = "jd.core.Main"
-
-archivesBaseName = 'jd-core-java'
-version = '1.2'
-group = 'jd.core'
 
 def JD_INTELLIJ_REPO_URL = 'https://github.com/bric3/jd-intellij'
 
@@ -31,16 +33,6 @@ task getNativeLibs(type: Exec) {
 
 if(new File(projectDir, 'jd-intellij').exists()) {
 	getNativeLibs.enabled = false
-}
-
-jar {
-	dependsOn getNativeLibs
-	metaInf {
-		from "jd-intellij/src/main/native"
-	}
-	manifest {
-		attributes 'Main-Class': mainClassName
-	}
 }
 
 build {
