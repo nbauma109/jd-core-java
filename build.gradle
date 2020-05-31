@@ -10,6 +10,7 @@ apply plugin: 'application'
 mainClassName = "com.github.nviennot.jd.core.java.Main"
 
 shadowJar {
+   dependsOn getNativeLibs
    relocate 'jd.core', 'com.github.nviennot.jd.core.java'
    metaInf {
       from "jd-intellij/src/main/native"
