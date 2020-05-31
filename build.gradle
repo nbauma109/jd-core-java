@@ -9,6 +9,14 @@ apply plugin: 'application'
 
 mainClassName = "com.github.nviennot.jd.core.java.Main"
 
+def JD_INTELLIJ_REPO_URL = 'https://github.com/bric3/jd-intellij'
+
+// Fetch the native libraries
+task getNativeLibs(type: Exec) {
+	workingDir projectDir
+	commandLine 'git', 'clone', JD_INTELLIJ_REPO_URL, '--branch', 'version-0.6'
+}
+
 shadowJar {
    dependsOn getNativeLibs
    relocate 'jd.core', 'com.github.nviennot.jd.core.java'
@@ -18,15 +26,6 @@ shadowJar {
    manifest {
       attributes 'Main-Class': mainClassName
    }
-}
-
-
-def JD_INTELLIJ_REPO_URL = 'https://github.com/bric3/jd-intellij'
-
-// Fetch the native libraries
-task getNativeLibs(type: Exec) {
-	workingDir projectDir
-	commandLine 'git', 'clone', JD_INTELLIJ_REPO_URL, '--branch', 'version-0.6'
 }
 
 if(new File(projectDir, 'jd-intellij').exists()) {
