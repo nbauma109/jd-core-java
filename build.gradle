@@ -32,8 +32,8 @@ if(new File(projectDir, 'jd-intellij').exists()) {
 	getNativeLibs.enabled = false
 }
 
-jar {
-	dependsOn shadowJar
+artifacts {
+    archives shadowJar
 }
 
 clean {
