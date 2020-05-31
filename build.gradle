@@ -17,9 +17,6 @@ shadowJar {
    manifest {
       attributes 'Main-Class': mainClassName
    }
-   baseName = 'jd-core-java'
-   classifier = ''
-   archiveVersion = ''
 }
 
 
@@ -35,7 +32,7 @@ if(new File(projectDir, 'jd-intellij').exists()) {
 	getNativeLibs.enabled = false
 }
 
-build {
+jar {
 	dependsOn shadowJar
 }
 
