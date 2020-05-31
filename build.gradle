@@ -17,7 +17,7 @@ shadowJar {
    manifest {
       attributes 'Main-Class': mainClassName
    }
-   baseName = 'jd-core-java-shadow'
+   baseName = 'jd-core-java'
    classifier = ''
    archiveVersion = ''
 }
